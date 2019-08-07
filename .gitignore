@@ -1,3 +1,8 @@
+# dotenv environment variables files
+.env
+.env.development
+.env.production
+
 # Logs
 logs
 *.log

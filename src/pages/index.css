@@ -1,0 +1,43 @@
+.cover {
+  position: relative;
+}
+
+#cover-img {
+    /* The image used */
+    background-image: url("../images/cover.jpg");
+  
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+  }
+
+#cover-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(159, 168, 223, 0.658);
+  z-index: 1;
+}
+
+#cover-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  color: black;
+  z-index: 2;
+}
+
+.content {
+  position: absolute;
+  top: 100vh;
+}
