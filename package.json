@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Connor Jaksik <connorjaksik@gmail.com>",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "gatsby": "^2.13.51",
     "gatsby-image": "^2.2.8",
     "gatsby-plugin-google-analytics": "^2.1.7",

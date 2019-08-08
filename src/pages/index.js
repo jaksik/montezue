@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
 import Checkout from "../components/checkout"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css"
 
 const IndexPage = ({ data }) => {
@@ -14,6 +15,8 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
+      {/* <Img fluid={data.placeholderImage.childImageSharp.fluid} /> */}
+
       <div className="cover">
         <div id="cover-img">
           <div id="cover-overlay"></div>
