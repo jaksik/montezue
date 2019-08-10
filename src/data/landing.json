@@ -1,0 +1,17 @@
+[
+    {
+        "heading":"Featured Item One",
+        "tag":"Buy Today",
+        "image": "../images/landing/loveland.JPG"
+    },
+    {
+        "heading":"Featured Item Two",
+        "tag":"Buy Today",
+        "image": "../images/landing/snowboard.JPG"
+    },
+    {
+        "heading":"Featured Item Three",
+        "tag":"Buy Today",
+        "image": "../images/landing/montezue.JPG"
+    }
+]

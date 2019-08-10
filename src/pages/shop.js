@@ -3,12 +3,9 @@ import { Link, graphql } from "gatsby"
 import { Container, Row, Col } from 'reactstrap';
 
 import Layout from "../components/layout"
-import Img from "gatsby-image"
 import SEO from "../components/seo"
 import Cart from '../components/cart'
 import Skus from '../components/Products/Skus'
-import PreviewRow from "../components/previewRow"
-import info from "../data/landing.json"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style/index.css"
 
@@ -18,29 +15,12 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      {/* <Img fluid={data.placeholderImage.childImageSharp.fluid} /> */}
 
-      <div className="cover">
-        <div id="cover-img">
-          <div id="cover-overlay"></div>
-            <div id="cover-text">
-                <h1><strong>Montezue</strong></h1>
-              </div>          
-          </div> 
-      </div>
-
-      <div className="content">
-        
+        <h1>Shop all products</h1>
         <Cart>
           <Skus />
         </Cart>
 
-        {/* Displays */}
-        {info.map(item => (
-          <PreviewRow data={item}/>
-        ))}
-
-      </div>
     </Layout>
   )
 }

@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Navbar from "./navbar"
 import Header from "./header"
+import { Row, Col } from "reactstrap"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -21,12 +22,19 @@ const Layout = ({ children }) => {
           title
         }
       }
+      placeholderImage: file(relativePath: { eq: "cart.png" }) {
+        childImageSharp {
+          fluid(quality: 100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
 
   return (
     <>
-      <Navbar/>
+      <Navbar fluid={data.placeholderImage.childImageSharp.fluid}/>
       {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
       <div
         style={{
@@ -35,10 +43,24 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        {/* <footer>
+        {/* <footer style={{paddingTop:`200vh`}}>
           © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <a href="https://www.montezue.com">Montezue</a>
+          <Row className="no-gutters">
+            <Col xs={3} md={4}>
+              <a>Terms Of Use</a>
+            </Col>
+            <Col xs={3} md={4}>
+              <a>Terms Of Use</a>
+            </Col>
+            <Col xs={3} md={4}>
+              <a>Partners</a>
+            </Col>
+            <Col xs={3} md={4}>
+              <a>Privacy Policy</a>
+            </Col>
+          </Row>
         </footer> */}
       </div>
     </>

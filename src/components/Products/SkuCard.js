@@ -1,51 +1,55 @@
-import React from "react"
+import React from 'react'
 
 const cardStyles = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-around",
-  alignItems: "flex-start",
-  padding: "1rem",
-  marginBottom: "1rem",
-  boxShadow: "5px 5px 25px 0 rgba(46,61,73,.2)",
-  backgroundColor: "#fff",
-  borderRadius: "6px",
-  maxWidth: "300px",
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  alignItems: 'flex-start',
+  padding: '1rem',
+  marginBottom: '1rem',
+  boxShadow: '5px 5px 25px 0 rgba(46,61,73,.2)',
+  backgroundColor: '#fff',
+  borderRadius: '6px',
+  maxWidth: '300px',
 }
 const buttonStyles = {
-  fontSize: "13px",
-  textAlign: "center",
-  color: "#fff",
-  outline: "none",
-  padding: "12px",
-  boxShadow: "2px 5px 10px rgba(0,0,0,.1)",
-  backgroundColor: "rgb(255, 178, 56)",
-  borderRadius: "6px",
-  letterSpacing: "1.5px",
+  fontSize: '13px',
+  textAlign: 'center',
+  color: '#fff',
+  outline: 'none',
+  padding: '12px',
+  boxShadow: '2px 5px 10px rgba(0,0,0,.1)',
+  backgroundColor: 'rgb(255, 178, 56)',
+  borderRadius: '6px',
+  letterSpacing: '1.5px',
 }
 
 const formatPrice = (amount, currency) => {
   let price = (amount / 100).toFixed(2)
-  let numberFormat = new Intl.NumberFormat(["en-US"], {
-    style: "currency",
+  let numberFormat = new Intl.NumberFormat(['en-US'], {
+    style: 'currency',
     currency: currency,
-    currencyDisplay: "symbol",
+    currencyDisplay: 'symbol',
   })
   return numberFormat.format(price)
 }
 
 const SkuCard = class extends React.Component {
-  async redirectToCheckout(event, sku, quantity = 1) {
-    event.preventDefault()
-    const { error } = await this.props.stripe.redirectToCheckout({
-      items: [{ sku, quantity }],
-      successUrl: `http://localhost:8000/page-2/`,
-      cancelUrl: `http://localhost:8000/advanced`,
-    })
+  state = {
+    disabled: false,
+    buttonText: 'ADD TO CART',
+    paymentMessage: '',
+  }
 
-    if (error) {
-      console.warn("Error:", error)
-    }
+  resetButton() {
+    this.setState({ disabled: false, buttonText: 'ADD ME BABY ONE MORE TIME!' })
+  }
+
+  addToCart(event, skuId, quantity = 1) {
+    event.preventDefault()
+    this.setState({ disabled: true, buttonText: 'ADDED...' })
+    this.props.addToCart(skuId)
+    setTimeout(this.resetButton.bind(this), 500)
   }
 
   render() {
@@ -56,10 +60,12 @@ const SkuCard = class extends React.Component {
         <p>Price: {formatPrice(sku.price, sku.currency)}</p>
         <button
           style={buttonStyles}
-          onClick={event => this.redirectToCheckout(event, sku.id)}
+          onClick={event => this.addToCart(event, sku.id)}
+          disabled={this.state.disabled}
         >
-          BUY ME
+          {this.state.buttonText}
         </button>
+        {this.state.paymentMessage}
       </div>
     )
   }

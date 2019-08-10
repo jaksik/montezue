@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { graphql, StaticQuery } from 'gatsby'
 import SkuCard from './SkuCard'
-
+import { Row, Col } from "reactstrap"
 const conatinerStyles = {
   display: 'flex',
   flexDirection: 'row',
@@ -10,47 +10,39 @@ const conatinerStyles = {
   padding: '1rem 0 1rem 0',
 }
 
-class Skus extends Component {
-  // Initialise Stripe.js with your publishable key.
-  // You can find your key in the Dashboard:
-  // https://dashboard.stripe.com/account/apikeys
-  state = {
-    stripe: null,
-  }
-  componentDidMount() {
-    const stripe = window.Stripe("pk_test_m1CkOjN6bKVkDf7hXoxOFhgc00e3saL74z")
-    this.setState({ stripe })
-  }
 
-  render() {
-    return (
-      <StaticQuery
-        query={graphql`
-          query SkusForProduct {
-            skus: allStripeSku {
-              edges {
-                node {
-                  id
-                  currency
-                  price
-                  attributes {
-                    name
-                  }
-                }
+//Filer product example
+
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query SkusForProduct {
+        skus: allStripeSku(
+          sort: { fields: [price] }
+        ) {
+          edges {
+            node {
+              id
+              currency
+              price
+              attributes {
+                name
               }
             }
           }
-        `}
-        render={({ skus }) => (
-          <div style={conatinerStyles}>
-            {skus.edges.map(({ node: sku }) => (
-              <SkuCard key={sku.id} sku={sku} stripe={this.state.stripe} />
-            ))}
-          </div>
-        )}
-      />
-    )
-  }
-}
-
-export default Skus
+        }
+      }
+    `}
+    render={({ skus }) => (
+      <div style={conatinerStyles}>
+        <Row className="no-gutters">
+        {skus.edges.map(({ node: sku }) => (
+            <Col xs={6} sm={4} lg={3}>
+              <SkuCard {...props} key={sku.id} sku={sku} />
+            </Col>
+        ))}
+        </Row>
+      </div>
+    )}
+  />
+)
