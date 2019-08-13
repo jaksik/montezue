@@ -12,7 +12,8 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <h1>Welcome to the blog</h1>
+      <div className="page-container">
+      <h1>Montezue Blog</h1>
       {/* Displays */}
       {data.blog.edges.map(({ node }) => {
           return (
@@ -30,6 +31,7 @@ const IndexPage = ({ data }) => {
             </div>
           )
         })}
+      </div>
     </Layout>
   )
 }

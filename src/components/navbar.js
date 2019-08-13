@@ -53,7 +53,10 @@ export default class Example extends React.Component {
               <NavItem>
                 <NavLink href="/blog/">Blog</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              <NavItem>
+                <NavLink href="/shop/">Shop</NavLink>
+              </NavItem>
+              {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Shop
                 </DropdownToggle>
@@ -69,7 +72,7 @@ export default class Example extends React.Component {
                   <NavLink href="/components/">Blog</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
               <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap">Gallery</NavLink>
               </NavItem>

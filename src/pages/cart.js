@@ -1,71 +1,37 @@
-import React from 'react'
-import Layout from "../components/layout"
-import { Row, Col } from "reactstrap"
-import Checkout from '../components/advancedCheckout'
+import React from "react"
 import { Link, graphql } from "gatsby"
+import { Container, Row, Col } from 'reactstrap';
+import Img from "gatsby-image"
 
-const Cart = class extends React.Component {
-  state = {
-    cart: [],
-  }
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import Cart from '../components/cart'
+import Checkout from "../components/advancedCheckout"
+import Skus from '../components/Products/Skus'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../style/index.css"
 
-  componentDidMount() {
-    // Get existing cart from localstorage if present.
-    const existingCart = JSON.parse(
-      localStorage.getItem('stripe_checkout_items')
-    )
-    if (existingCart && existingCart.length) {
-      this.setState({ cart: existingCart })
-    }
-  }
+const IndexPage = ({ data }) => {
+  console.log("data: ", data);
+  console.log("image: ", data.skus.edges[0].node.localFiles[0].childImageSharp.fluid);
+  let image = data.skus.edges[0].node.localFiles[0].childImageSharp.fluid;
+  return (
+    <Layout>
+      <SEO title="Home" />
+      {/* <Img fluid={image} /> */}
 
-  addToCart(newItem) {
-    let itemExisted = false
-    let updatedCart = this.state.cart.map(item => {
-      if (newItem === item.sku) {
-        itemExisted = true
-        return { sku: item.sku, quantity: ++item.quantity }
-      } else {
-        return item
-      }
-    })
-    if (!itemExisted) {
-      updatedCart = [...updatedCart, { sku: newItem, quantity: 1 }]
-    }
-    this.setState({ cart: updatedCart })
-    // Store the cart in the localStorage.
-    localStorage.setItem('stripe_checkout_items', JSON.stringify(updatedCart))
-  }
-
-  render() {
-    console.log("cart: ", this.state.cart)
-    return (
-      <Layout>
-        <Checkout cart={this.state.cart} />
-        {this.state.cart.map(item => {
-            return (
-                <Row className="no-gutters">
-                    <Col xs={4}>
-                        <img/>
-                    </Col>
-                    <Col xs={8}>
-                        <p>{item.sku}</p>
-                    </Col>
-                </Row>
-            )
-        })}
-      </Layout>
-    )
-  }
+          <div className="page-container">
+          <Cart skus={data} />
+          </div>
+    </Layout>
+  )
 }
 
-export default Cart
+export default IndexPage
 
-//Query skus, filter skus in cart
 export const query = graphql`
-query SkusForProduc {
+query SkusForPrdu {
   skus: allStripeSku(
-    filter: { product: { id: { eq: "prod_EGl7ZnT96XrPf6" } } }
     sort: { fields: [price] }
   ) {
     edges {
@@ -76,8 +42,16 @@ query SkusForProduc {
         attributes {
           name
         }
+        localFiles {
+          childImageSharp {
+            fluid(quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
 }
+
 `

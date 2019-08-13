@@ -1,11 +1,17 @@
 import React from 'react'
-
-import Checkout from './advancedCheckout'
+import Checkout from "./advancedCheckout"
 
 const Cart = class extends React.Component {
-  state = {
-    cart: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      cart: [],
+      productInfo: [],
+    };
+    this.removeItem = this.removeItem.bind(this);
   }
+  
+  
 
   componentDidMount() {
     // Get existing cart from localstorage if present.
@@ -21,33 +27,34 @@ const Cart = class extends React.Component {
     return this.state.cart
   }
 
-  addToCart(newItem) {
-    let itemExisted = false
-    let updatedCart = this.state.cart.map(item => {
-      if (newItem === item.sku) {
-        itemExisted = true
-        return { sku: item.sku, quantity: ++item.quantity }
-      } else {
-        return item
-      }
-    })
-    if (!itemExisted) {
-      updatedCart = [...updatedCart, { sku: newItem, quantity: 1 }]
-    }
-    this.setState({ cart: updatedCart })
-    // Store the cart in the localStorage.
-    localStorage.setItem('stripe_checkout_items', JSON.stringify(updatedCart))
+  removeItem(removedSku) {
+    console.log("removed: ", removedSku)
+    const cart = this.state.cart.filter(product => product.sku !== removedSku);
+    console.log("new cart: ", cart)
+    this.setState({ cart })
+    console.log("new cart: ", this.state.cart);
+    localStorage.setItem('stripe_checkout_items', JSON.stringify(cart))
+
   }
 
   render() {
-    console.log("cart: ", this.state.cart)
+    console.log("cat: ", this.state.cart)
     return (
       <div>
-        {/* <Checkout cart={this.state.cart} /> */}
-        {React.cloneElement(this.props.children, {
-          addToCart: this.addToCart.bind(this),
-          cart: this.state.cart,
+        {/* Map through skus filtering itmes in cart
+        Bind functions to each item for deletion */}
+
+        {this.state.cart.map(item => {
+
+          return (
+            <div>
+              <p>{item.sku}</p>
+              <button onClick={event => this.removeItem(item.sku)}>Remove From Cart</button>
+
+              </div>
+          )
         })}
+        <Checkout cart={this.state.cart}/>
       </div>
     )
   }

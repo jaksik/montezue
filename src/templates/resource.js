@@ -3,6 +3,7 @@ import Layout from '../components/layout';
 import Img from 'gatsby-image';
 import Metatags from '../components/Metatags';
 import { graphql } from 'gatsby'
+import "../style/index.css"
 
 function BlogPost(props) {
 
@@ -19,7 +20,7 @@ function BlogPost(props) {
                 url={url}
                 pathname={props.location.pathname}
             />
-            <div>
+            <div className="page-container">
                 <h1>{title}</h1>
                 <Img fluid={post.frontmatter.image.childImageSharp.fluid} />
                 <div dangerouslySetInnerHTML={{ __html: post.html }} />

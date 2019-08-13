@@ -2,11 +2,12 @@ import React from 'react'
 import { graphql, StaticQuery } from 'gatsby'
 import SkuCard from './SkuCard'
 import { Row, Col } from "reactstrap"
+
 const conatinerStyles = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-between',
+  // display: 'flex',
+  // flexDirection: 'row',
+  // flexWrap: 'wrap',
+  // justifyContent: 'space-between',
   padding: '1rem 0 1rem 0',
 }
 
@@ -27,6 +28,13 @@ export default props => (
               price
               attributes {
                 name
+              }
+              localFiles {
+                childImageSharp {
+                  fluid(quality: 100) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
             }
           }

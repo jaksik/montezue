@@ -1,17 +1,10 @@
 import React from 'react'
-import Img from "gatsby-image"
 
 const cardStyles = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  // alignItems: 'flex-start',
-  padding: '1rem',
-  marginBottom: '1rem',
-  // boxShadow: '5px 5px 25px 0 rgba(46,61,73,.2)',
+  boxShadow: '5px 5px 25px 0 rgba(46,61,73,.2)',
   backgroundColor: '#fff',
   borderRadius: '6px',
-  // maxWidth: '300px',
+  maxWidth: '300px',
 }
 const buttonStyles = {
   fontSize: '13px',
@@ -55,11 +48,9 @@ const SkuCard = class extends React.Component {
 
   render() {
     const sku = this.props.sku
-    console.log("props: ", this.props);
     return (
       <div style={cardStyles}>
-        <Img fluid={sku.localFiles[0].childImageSharp.fluid}/>
-        <strong>{sku.attributes.name}</strong>
+        <h4>{sku.attributes.name}</h4>
         <p>Price: {formatPrice(sku.price, sku.currency)}</p>
         <button
           style={buttonStyles}

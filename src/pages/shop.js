@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Cart from '../components/cart'
+import Cart from '../components/addToCart'
 import Skus from '../components/Products/Skus'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style/index.css"
@@ -16,11 +16,13 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" />
 
-        <h1>Shop all products</h1>
+        <div className="page-container">
+          <h1>Shop all products</h1>
+          
+        </div>
         <Cart>
-          <Skus />
-        </Cart>
-
+            <Skus />
+          </Cart>
     </Layout>
   )
 }

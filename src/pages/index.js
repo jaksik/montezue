@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 import Layout from "../components/layout"
 import Img from "gatsby-image"
 import SEO from "../components/seo"
-import Cart from '../components/cart'
+import Cart from '../components/addToCart'
 import Skus from '../components/Products/Skus'
 import PreviewRow from "../components/previewRow"
 import info from "../data/landing.json"
@@ -24,21 +24,17 @@ const IndexPage = ({ data }) => {
         <div id="cover-img">
           <div id="cover-overlay"></div>
             <div id="cover-text">
-                <h1><strong>Montezue</strong></h1>
+                <h1><strong>Welcome</strong></h1>
               </div>          
           </div> 
       </div>
 
       <div className="content">
-        
-        <Cart>
-          <Skus />
-        </Cart>
 
         {/* Displays */}
-        {info.map(item => (
+        {/* {info.map(item => (
           <PreviewRow data={item}/>
-        ))}
+        ))} */}
 
       </div>
     </Layout>
