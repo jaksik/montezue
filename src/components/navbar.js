@@ -39,14 +39,27 @@ export default class Example extends React.Component {
      
             </div>
         </header> */}
-        <Row className="no-gutters">
+        <Row className="no-gutters d-none d-md-block">
           <Col xs={{ size: 3, offset: 9 }}>
             <a href="/cart"><Img fluid={this.props.fluid} style={{ width:`40px`}}/></a>
             
           </Col>
         </Row>
         <Navbar color="" light expand="md"  style={{ background: ``}}>
-          <NavbarBrand href="/" className="text-danger"><img src={logo} width={150}/></NavbarBrand>
+          <NavbarBrand href="/" className="">
+            {/* <img src={logo} width={150}/> */}
+            Montezue
+            </NavbarBrand>
+            <Nav className="ml-auto" navbar>
+              <NavItem className="d-block d-md-none">
+                  <NavLink href="/blog/"><a href="/cart"><Img fluid={this.props.fluid} style={{ width:`30px`}}/></a></NavLink>
+                </NavItem>
+              </Nav>
+              <Nav className="ml-auto" navbar>
+              <NavItem className="d-block d-md-none">
+                  <NavLink href="/blog/"><a href="/cart"><Img fluid={this.props.fluid} style={{ width:`30px`}}/></a></NavLink>
+                </NavItem>
+              </Nav>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

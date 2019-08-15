@@ -29,6 +29,9 @@ export default props => (
               attributes {
                 name
               }
+              fields {
+                slug
+              }
               localFiles {
                 childImageSharp {
                   fluid(quality: 100) {

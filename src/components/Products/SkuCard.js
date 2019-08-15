@@ -1,5 +1,6 @@
 import React from 'react'
 import Img from "gatsby-image"
+import { Link } from "gatsby"
 
 const cardStyles = {
   display: 'flex',
@@ -57,7 +58,8 @@ const SkuCard = class extends React.Component {
     const sku = this.props.sku
     console.log("props: ", this.props);
     return (
-      <div style={cardStyles}>
+      <Link to={"buy/" + sku.fields.slug}>
+        <div style={cardStyles}>
         <Img fluid={sku.localFiles[0].childImageSharp.fluid}/>
         <strong>{sku.attributes.name}</strong>
         <p>Price: {formatPrice(sku.price, sku.currency)}</p>
@@ -70,6 +72,7 @@ const SkuCard = class extends React.Component {
         </button>
         {this.state.paymentMessage}
       </div>
+      </Link>
     )
   }
 }

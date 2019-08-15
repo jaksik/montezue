@@ -1,4 +1,6 @@
 const path = require(`path`)
+const slug = require('slug')
+
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = ({ graphql, actions }) => {
@@ -21,9 +23,25 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allStripeSku {
+          edges {
+            node {
+              fields {
+                slug
+              }
+              product {
+                id
+                name
+              }
+            }
+          }
+        }
       }
     `
   ).then(result => {
+    if (result.errors) {
+      Promise.reject(result.errors)
+    }
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
       const id = node.id
         createPage({
@@ -37,6 +55,20 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })
+    
+    const products = {}
+
+    result.data.allStripeSku.edges.forEach(({ node }) => {
+      products[node.product.id] = node.fields.slug
+    })
+
+      Object.entries(products).forEach(([id, slug]) => {
+        createPage({
+          path: 'buy/' + slug,
+          component: path.resolve('src/templates/product.js'),
+          context: { id, slug: slug }
+        })
+      })
     })
   }
 
@@ -44,11 +76,19 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions
 
     if (node.internal.type === `MarkdownRemark`) {
-      const value = createFilePath({ node, getNode, basePath: `pages` })
+      let value = createFilePath({ node, getNode, basePath: `pages` })
       createNodeField({
         name: `slug`,
         node,
         value,
+      })
+    } 
+    if (node.internal.type === 'StripeSku') {
+      const value = slug(node.product.name, slug.defaults.modes['rfc3986'])
+      createNodeField({
+        node,
+        name: 'slug',
+        value
       })
     }
   }

@@ -9,6 +9,7 @@ import Cart from '../components/addToCart'
 import Skus from '../components/Products/Skus'
 import PreviewRow from "../components/previewRow"
 import info from "../data/landing.json"
+import Carousel from "../components/carousel"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style/index.css"
 
@@ -19,7 +20,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" />
       {/* <Img fluid={data.placeholderImage.childImageSharp.fluid} /> */}
-
+      <Carousel/>
       <div className="cover">
         <div id="cover-img">
           <div id="cover-overlay"></div>
