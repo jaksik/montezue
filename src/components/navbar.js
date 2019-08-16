@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../images/mountain.png'
 import {
   Collapse,
   Navbar,
@@ -39,33 +38,47 @@ export default class Example extends React.Component {
      
             </div>
         </header> */}
-        <Row className="no-gutters d-none d-md-block">
+        <Row className="no-gutters d-none d-sm-block">
           <Col xs={{ size: 3, offset: 9 }}>
             <a href="/cart"><Img fluid={this.props.fluid} style={{ width:`40px`}}/></a>
-            
           </Col>
         </Row>
+
         <Navbar color="" light expand="md"  style={{ background: ``}}>
+          <Row>
+          <Col xs={4}>
           <NavbarBrand href="/" className="">
             {/* <img src={logo} width={150}/> */}
             Montezue
             </NavbarBrand>
-            <Nav className="ml-auto" navbar>
-              <NavItem className="d-block d-md-none">
-                  <NavLink href="/blog/"><a href="/cart"><Img fluid={this.props.fluid} style={{ width:`30px`}}/></a></NavLink>
-                </NavItem>
-              </Nav>
+          </Col>
+            
+          <Col xs={2} className="d-block d-sm-none">
               <Nav className="ml-auto" navbar>
-              <NavItem className="d-block d-md-none">
-                  <NavLink href="/blog/"><a href="/cart"><Img fluid={this.props.fluid} style={{ width:`30px`}}/></a></NavLink>
-                </NavItem>
-              </Nav>
-          <NavbarToggler onClick={this.toggle} />
+                <NavItem>
+                    <NavLink href="/cart/"><Img fluid={this.props.fluid} style={{ width:`25px`}}/></NavLink>
+                  </NavItem>
+                </Nav>
+            </Col>
+
+            <Col xs={2} className="d-block d-sm-none">
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                    <NavLink href="/cart/"><Img fluid={this.props.fluid} style={{ width:`25px`}}/></NavLink>
+                  </NavItem>
+                </Nav>
+            </Col>
+
+            <Col xs={4}>
+              <NavbarToggler onClick={this.toggle} />
+              </Col>          
+          </Row>
+
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="/blog/">Blog</NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink href="/shop/">Shop</NavLink>
               </NavItem>
@@ -86,18 +99,24 @@ export default class Example extends React.Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown> */}
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap">Gallery</NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem> */}
+              {/* <NavItem>
                 <NavLink href="/about/">About</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/contact/">Contact</NavLink>
-              </NavItem>
+              </NavItem> */}
             </Nav>
           </Collapse>
         </Navbar>
+
+        <Row style={{background: `black`}} className="no-gutters">
+          <Col xs={12}>
+              <p style={{color: `white`, textAlign: `center`}}>Join VIP Peak Rewards for 10% off your first purchase online.</p>
+          </Col>
+        </Row>
       </div>
     );
   }

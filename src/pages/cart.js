@@ -1,13 +1,9 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import { Container, Row, Col } from 'reactstrap';
-import Img from "gatsby-image"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Cart from '../components/cart'
-import Checkout from "../components/advancedCheckout"
-import Skus from '../components/Products/Skus'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style/index.css"
 
@@ -30,7 +26,7 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const query = graphql`
-query SkusForPrdu {
+query SkusForct {
   skus: allStripeSku(
     sort: { fields: [price] }
   ) {
@@ -41,6 +37,9 @@ query SkusForPrdu {
         price
         attributes {
           name
+        }
+        fields {
+          slug
         }
         localFiles {
           childImageSharp {
@@ -53,5 +52,4 @@ query SkusForPrdu {
     }
   }
 }
-
 `

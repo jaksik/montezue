@@ -7,7 +7,7 @@ const buttonStyles = {
   outline: 'none',
   padding: '12px 60px',
   boxShadow: '2px 5px 10px rgba(0,0,0,.1)',
-  backgroundColor: 'rgb(255, 178, 56)',
+  backgroundColor: 'red',
   borderRadius: '6px',
   letterSpacing: '1.5px',
 }
@@ -26,8 +26,8 @@ const Checkout = class extends React.Component {
     event.preventDefault()
     const { error } = await this.stripe.redirectToCheckout({
       items: this.props.cart,
-      successUrl: `http://localhost:8000/page-2/`,
-      cancelUrl: `http://localhost:8000/advanced/`,
+      successUrl: `http://localhost:8000/`,
+      cancelUrl: `http://localhost:8000/cart/`,
     })
 
     if (error) {
@@ -42,7 +42,7 @@ const Checkout = class extends React.Component {
         onClick={event => this.redirectToCheckout(event)}
         disabled={!this.props.cart.length}
       >
-        {this.props.cart.length ? 'GO TO CHECKOUT' : 'CART IS EMPTY'}
+        {this.props.cart.length ? 'Secure Checkout' : 'CART IS EMPTY'}
       </button>
     )
   }

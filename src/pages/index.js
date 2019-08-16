@@ -1,14 +1,8 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import { Container, Row, Col } from 'reactstrap';
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Img from "gatsby-image"
 import SEO from "../components/seo"
-import Cart from '../components/addToCart'
-import Skus from '../components/Products/Skus'
-import PreviewRow from "../components/previewRow"
-import info from "../data/landing.json"
 import Carousel from "../components/carousel"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style/index.css"
@@ -21,14 +15,14 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       {/* <Img fluid={data.placeholderImage.childImageSharp.fluid} /> */}
       <Carousel/>
-      <div className="cover">
+      {/* <div className="cover">
         <div id="cover-img">
           <div id="cover-overlay"></div>
             <div id="cover-text">
                 <h1><strong>Welcome</strong></h1>
               </div>          
           </div> 
-      </div>
+      </div> */}
 
       <div className="content">
 
@@ -54,5 +48,4 @@ query {
     }
   }
 }
-
 `
